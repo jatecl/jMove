@@ -1,10 +1,266 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>jMove demo</title>
+	<title>jMove demo</title>
+	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 	<script src="../src/jmove.js"></script>
+	<style type="text/css">
+		.js { border: 1px solid #ccc; background: #f5f5f5; padding: 10px; margin: 10px 10px 10px 20px; }
+		.css { border: 1px solid #cde; background: #f5faff; padding: 10px; margin: 10px 10px 10px 20px; }
+		.btn { margin-left: 20px; }
+	</style>
 </head>
 <body>
-
+	<h1>jMove demo</h1>
+	<p>Sample:</p>
+	<div class="js">this is js code</div>
+	<div class="css">this is css code</div>
+	<h2>keyframes</h2>
+	<p>css 3 animation keyframes:</p>
+<pre class="js">
+jMove.keyframes("name", {
+	from: { transform: "scale(1.2)" },
+	to: { transform: "scale(1)" }
+});
+</pre>
+<pre class="css" id="d1"></pre>
+	<script>
+		var temp = jMove.keyframes().add("name", {
+			from: { transform: "scale(1.2)" },
+			to: { transform: "scale(1)" }
+		});
+		d1.innerHTML = temp.toString();
+	</script>
+	<p>or:</p>
+<pre class="js">
+jMove.keyframes().add("name1", {
+		from: { transform: "scale(1)" },
+		to: { transform: "scale(1.2)" }
+	}).add("name2", {
+		from: { transform: "scale(1)" },
+		to: { transform: "scale(0.8)" }
+	}).flush();
+</pre>
+<pre class="css" id="d2"></pre>
+	<script>
+		temp = jMove.keyframes().add("name1", {
+			from: { transform: "scale(1)" },
+			to: { transform: "scale(1.2)" }
+		}).add("name2", {
+			from: { transform: "scale(1)" },
+			to: { transform: "scale(0.8)" }
+		});
+		d2.innerHTML = temp.toString();
+		temp.flush();
+	</script>
+	<h2>animation</h2>
+<pre class="js">
+jMove.animation(element1, "name1");
+</pre>
+	<div style="height:100px;position:relative;">
+		<div style="width:80px;height:80px;left:10px;top:10px;position:absolute;background:#3399ff" id="element1"></div>
+	</div>
+	<button onclick="jMove.animation(element1, 'name1');" class="btn">Start</button>
+<p>or:</p>
+<pre class="js">
+jMove.animation(element2, "name2 1s ease-in-out 0.5s infinite alternate");
+</pre>
+	<div style="height:100px;position:relative;">
+		<div style="width:80px;height:80px;left:10px;top:10px;position:absolute;background:#ff9933" id="element2"></div>
+	</div>
+	<button onclick="jMove.animation(element2, 'name2 1s ease-in-out 0.5s infinite alternate');" class="btn">Start</button>
+	<h2>animationReady</h2>
+	<p>wait for realtime keyframes</p>
+<pre class="js">
+var keyframes_name = "temp_" + new Date().getTime();
+jMove.keyframes(keyframes_name, {
+	from: { left: "0px" },
+	to: { left: Math.random() * 500 + "px" }
+});
+jMove.animationReady(function(){	
+	jMove.animation(element3, keyframes_name);
+});
+</pre>
+	<div style="height:100px;position:relative;">
+		<div style="width:80px;height:80px;left:10px;top:10px;position:absolute;background:#99ff33" id="element3"></div>
+	</div>
+	<button onclick='var keyframes_name = "temp_" + new Date().getTime();
+	jMove.keyframes(keyframes_name, {
+		from: { left: "0px" },
+		to: { left: Math.random() * 500 + "px" }
+	});
+	jMove.animationReady(function () {
+		jMove.animation(element3, keyframes_name);
+	});' class="btn">Start</button>
+	<h2>transition &amp; transitionReady</h2>
+<pre class="js">
+jMove.transition(element4, "all 0.4s ease 0.1s");
+jMove.transitionReady(function(){
+	element4.style.left = Math.random() * 500 + "px";
+});
+</pre>
+	<div style="height:100px;position:relative;">
+		<div style="width:80px;height:80px;left:10px;top:10px;position:absolute;background:#9933ff" id="element4"></div>
+	</div>
+	<button onclick='
+	jMove.transition(element4, "all 0.4s ease 0.1s");
+	jMove.transitionReady(function () {
+		element4.style.left = Math.random() * 500 + "px";
+	});' class="btn">
+		Start
+	</button>
+	<p>or:</p>
+<pre class="js">
+jMove.transition(element5, "left 0.4s ease 0.1s", "top 1s ease-in 0.5s", function(){	
+	element5.style.left = Math.random() * 500 + "px";	
+	element5.style.top = Math.random() * 50 + "px";
+});
+</pre>
+	<div style="height:100px;position:relative;">
+		<div style="width:80px;height:80px;left:10px;top:10px;position:absolute;background:#33ff99" id="element5"></div>
+	</div>
+	<button onclick='
+	jMove.transition(element5, "left 0.4s ease 0.1s", "top 1s ease-in 0.5s", function () {
+		element5.style.left = Math.random() * 500 + "px";
+		element5.style.top = Math.random() * 300 + "px";
+	});' class="btn">
+		Start
+	</button>
+	<h2>to</h2>
+	<p>an easier way</p>
+<pre class="js">
+jMove.to(element6, 0.4, { left: Math.random() * 500 + "px" });
+</pre>
+	<div style="height:100px;position:relative;">
+		<div style="width:80px;height:80px;left:10px;top:10px;position:absolute;background:#f39" id="element6"></div>
+	</div>
+	<button onclick='jMove.to(element6, 0.4, { left: Math.random() * 500 + "px" });' class="btn">
+		Start
+	</button>
+	<p>or:</p>
+<pre class="js">
+jMove.to(element7, 2, { 
+	left: Math.random() * 500 + "px", 
+	top:Math.random() * 300 + "px"
+}, { 
+	ease: jMove.ease.sineInOut, 
+	delay: 0.5 
+}, function(){ alert("end") });
+</pre>
+	<div style="height:100px;position:relative;">
+		<div style="width:80px;height:80px;left:10px;top:10px;position:absolute;background:#39f" id="element7"></div>
+	</div>
+	<button onclick='jMove.to(element7, 2, { left: Math.random() * 500 + "px", top: Math.random() * 300 + "px" }, { ease: jMove.ease.sineInOut, delay: 0.5, end: function () { alert("end") } });' class="btn">
+		Start
+	</button>
+	<h2>from</h2>
+<pre class="js">
+jMove.from(element8, 0.4, { left: Math.random() * 500 + "px" });
+</pre>
+	<div style="height:100px;position:relative;">
+		<div style="width:80px;height:80px;left:10px;top:10px;position:absolute;background:#3f9;" id="element8"></div>
+	</div>
+	<button onclick='jMove.from(element8, 0.4, { left: Math.random() * 500 + "px" });' class="btn">
+		Start
+	</button>
+	<h2>fromTo</h2>
+<pre class="js">
+jMove.fromTo(element9, 0.4, { left: Math.random() * 500 + "px" }, { left: Math.random() * 500 + "px" });
+</pre>
+	<div style="height:100px;position:relative;">
+		<div style="width:80px;height:80px;left:10px;top:10px;position:absolute;background:#f39;" id="element9"></div>
+	</div>
+	<button onclick='jMove.fromTo(element9, 0.4, { left: Math.random() * 500 + "px" }, { left: Math.random() * 500 + "px" });' class="btn">
+		Start
+	</button>
+	<h2>ease</h2>
+<pre class="js">
+jMove.ease = {
+	in$: 'ease-in',
+	out: 'ease-out',
+	inOut: 'ease-in-out',
+	linear: 'linear',
+	ease: 'ease',
+	snap: 'cubic-bezier(0,1,.5,1)',
+	quadIn: 'cubic-bezier(0.550, 0.085, 0.680, 0.530)',
+	quadOut: 'cubic-bezier(0.250, 0.460, 0.450, 0.940)',
+	quadInOut: 'cubic-bezier(0.455, 0.030, 0.515, 0.955)',
+	cubicIn: 'cubic-bezier(0.550, 0.055, 0.675, 0.190)',
+	cubicOut: 'cubic-bezier(0.215, 0.610, 0.355, 1.000)',
+	cubicInOut: 'cubic-bezier(0.645, 0.045, 0.355, 1.000)',
+	quartIn: 'cubic-bezier(0.895, 0.030, 0.685, 0.220)',
+	quartOut: 'cubic-bezier(0.165, 0.840, 0.440, 1.000)',
+	quartInOut: 'cubic-bezier(0.770, 0.000, 0.175, 1.000)',
+	quintIn: 'cubic-bezier(0.755, 0.050, 0.855, 0.060)',
+	quintOut: 'cubic-bezier(0.230, 1.000, 0.320, 1.000)',
+	quintInOut: 'cubic-bezier(0.860, 0.000, 0.070, 1.000)',
+	sineIn: 'cubic-bezier(0.470, 0.000, 0.745, 0.715)',
+	sineOut: 'cubic-bezier(0.390, 0.575, 0.565, 1.000)',
+	sineInOut: 'cubic-bezier(0.445, 0.050, 0.550, 0.950)',
+	expoIn: 'cubic-bezier(0.950, 0.050, 0.795, 0.035)',
+	expoOut: 'cubic-bezier(0.190, 1.000, 0.220, 1.000)',
+	expoInOut: 'cubic-bezier(1.000, 0.000, 0.000, 1.000)',
+	circIn: 'cubic-bezier(0.600, 0.040, 0.980, 0.335)',
+	circOut: 'cubic-bezier(0.075, 0.820, 0.165, 1.000)',
+	circInOut: 'cubic-bezier(0.785, 0.135, 0.150, 0.860)',
+	backIn: 'cubic-bezier(0.600, -0.280, 0.735, 0.045)',
+	backOut: 'cubic-bezier(0.175, 0.885, 0.320, 1.275)',
+	backInOut: 'cubic-bezier(0.680, -0.550, 0.265, 1.550)'
+};
+</pre>
+	<h2>matrix</h2>
+<pre class="js">
+jMove.matrix().scale(1.5).rotate(30).skew(20, 10).translate(120, 10).flush(element10);
+</pre>
+	<div style="height:100px;position:relative;">
+		<div style="width:80px;height:80px;left:10px;top:10px;position:absolute;background:#f93;" id="element10"></div>
+	</div>
+	<button onclick='jMove.matrix().scale(1.5).rotate(30).skew(20, 10).translate(120, 10).flush(element10);' class="btn">
+		Start
+	</button>
+	<h2>move</h2>
+<pre class="js">
+var move = jMove.move(element11)
+	.from(0.4, { scale: 0.5 }, 0.3)
+	.to(0.8, { rotate: 150 })
+	.fromTo(1.2, { left: "100px" }, { left: "300px" })
+	.timeScale(2).flush(function(){
+		alert("end");
+	});
+</pre>
+	<div style="height:100px;position:relative;">
+		<div style="width:80px;height:80px;left:10px;top:10px;position:absolute;background:#93f;" id="element11"></div>
+	</div>
+	<button onclick='
+var move = jMove.move(element11).from(0.4, { scale: 0.5 }, 0.3).to(0.8, { rotate: 150 }).fromTo(1.2, { left: "100px" }, { left: "300px" }).timeScale(2).flush(function(){
+	alert("end");
+});' class="btn">
+		Start
+	</button>
+	<h2>move.kill</h2>
+<pre class="js">	
+var move = jMove.move(element12)
+	.from(0.4, { scale: 0.5 }, 0.3)
+	.to(0.8, { rotate: 150 })
+	.fromTo(1.2, { left: "100px" }, { left: "300px" })
+	.timeScale(2).flush(function(){
+		alert("end");
+	});
+setTimeout(function(){
+	move.kill();
+}, 1200);
+</pre>
+	<div style="height:100px;position:relative;">
+		<div style="width:80px;height:80px;left:10px;top:10px;position:absolute;background:#9f3;" id="element12"></div>
+	</div>
+	<button onclick='
+var move = jMove.move(element12).from(0.4, { scale: 0.5 }, 0.3).to(0.8, { rotate: 150 }).fromTo(1.2, { left: "100px" }, { left: "300px" }).timeScale(2).flush(function () {
+	alert("end");
+});
+setTimeout(function(){
+	move.kill();
+}, 1200);' class="btn">
+		Start
+	</button>
 </body>
 </html>

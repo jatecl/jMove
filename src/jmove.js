@@ -65,8 +65,7 @@ var jMove = (function () {
 				: css.appendChild(e);
 		})(document.createTextNode(csstxt));
 	}
-	//输出到css标签
-	_Keyframes.prototype.flush = function (id) {
+	_Keyframes.prototype.toString = function () {
 		var _cssLines = "";
 		for (var i in this._list) {
 			_cssLines += createSteps(i, this._list[i]);
@@ -74,6 +73,11 @@ var jMove = (function () {
 		for (var i in this._css) {
 			_cssLines += i + "{" + createCssItem(this._css[i]) + "}\r\n";
 		}
+		return _cssLines;
+	};
+	//输出到css标签
+	_Keyframes.prototype.flush = function (id) {
+		var _cssLines = this.toString();
 		this._list = {};
 		this._css = {};
 		createStyleElement(_cssLines, id);
@@ -145,7 +149,7 @@ var jMove = (function () {
 			for (var i = 0; i < arguments.length; ++i) args.push(_checkMatrixValue(arguments[i], unit));
 			if (args.length == 1) {
 				if (typeof args[0] == "string") args = args[0].split(",");
-				if (args.length == 1) args.push(args[0]);
+				if (args.length == 1 && key != "rotate") args.push(args[0]);
 			}
 			_setMatrixItem.call(this, key, args.join());
 			return this;
@@ -173,7 +177,7 @@ var jMove = (function () {
 	_defineMatrixMethod("translate", 0, "px");
 	_defineMatrixMethod("scale", 1);
 	_defineMatrixMethod("rotate", 0, "deg", 0, 3);
-	_defineMatrixMethod("skewX", 0, "deg", 1);
+	_defineMatrixMethod("skew", 0, "deg", 1);
 	//变成css的样式
 	_Matrix.prototype.toString = function () {
 		if (typeof this._value == "string") return this._value;
@@ -280,10 +284,11 @@ var jMove = (function () {
 	};
 	//预定义的time functions
 	var time_funcs = {
-		'in': 'ease-in',
+		in$: 'ease-in',
 		out: 'ease-out',
 		inOut: 'ease-in-out',
 		linear: 'linear',
+		ease: 'ease',
 		snap: 'cubic-bezier(0,1,.5,1)',
 		quadIn: 'cubic-bezier(0.550, 0.085, 0.680, 0.530)',
 		quadOut: 'cubic-bezier(0.250, 0.460, 0.450, 0.940)',
@@ -352,14 +357,16 @@ var jMove = (function () {
 				arr.push(o);
 			}
 		}
-		t.css(e, "transition", arr.join(","));
 		//回调
 		if (onready.length) {
 			t.transitionReady(function () {
+				t.css(e, "transition", arr.join(","));
 				onready.forEach(function (o) {
 					o();
 				});
 			});
+		} else {
+			t.css(e, "transition", arr.join(","));
 		}
 		return t;
 	};
@@ -395,16 +402,16 @@ var jMove = (function () {
 		} else if (typeof s == "number") {
 			s = { delay: s };
 		}
-		s.end = end;
+		if (end) s.end = end;
 		return s;
 	};
 	//从当前状态移动到指定状态 settings = { delay: 0, ease: "ease", now: false }
 	t.to = function (node, duration, to, settings, end) {
 		var s = _to(settings, end);
-		t.transition(node, "all " + duration + "s " + (s.ease || "ease") + " " + (s.delay || 0) + "s");
 		var start = function () {
+			t.transition(node, "all " + duration + "s " + (s.ease || "ease") + " " + (s.delay || 0) + "s");
 			t.css(node, to);
-			if (s.end) setTimeout(s.end, duration * 1000);
+			if (s.end) setTimeout(s.end, ((s.delay || 0) + duration) * 1000);
 		};
 		if (s.now) start();
 		else t.transitionReady(start);
@@ -446,6 +453,7 @@ var jMove = (function () {
 	//从指定状态移动到指定状态 settings = { delay: 0, ease: "ease" }
 	t.fromTo = function (node, duration, from, to, settings, end) {
 		if (settings && settings.now) settings.now = false;
+		t.transition(node, "none");
 		t.css(node, from);
 		return t.to(node, duration, to, settings, end);
 	};
@@ -515,13 +523,15 @@ var jMove = (function () {
 					ease,
 					(s.delay || 0) * this._timeScale + "s"].join(" "));
 			}
-			t.css(this._node, "transition", jtr.join());
 
 			var me = this;
-			if (now) t.css(this._node, this._to);
-			else t.transitionReady(function () {
+			var start = function () {
 				t.css(me._node, me._to);
-			});
+				t.css(me._node, "transition", jtr.join());
+			};
+
+			if (now) start();
+			else t.transitionReady(start);
 		}
 	};
 	//终止执行
