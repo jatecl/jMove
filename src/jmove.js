@@ -86,16 +86,13 @@ var jMove = (function () {
 
 	//css3 matrix，还需要改进，设置子属性的时候能读取父属性就好了
 	var _Matrix = function () {
-		this._type = 1;
 		this._value = "";
 	};
 	_Matrix.prototype.matrix = function (a, b, c, d, x, y) {
-		this._type = 2;
 		this._value = 'matrix(' + [a, b, c, d, x, y].join() + ")";
 		return this;
 	};
 	_Matrix.prototype.matrix3d = function (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
-		this._type = 6;
 		this._value = 'matrix3d(' + [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p].join() + ")";
 		return this;
 	};

@@ -91,7 +91,9 @@ or:
 
 ## fromTo
 
-<pre><code>jMove.fromTo(element9, 0.4, { left: Math.random() * 500 + "px" }, { left: Math.random() * 500 + "px" });</code></pre>
+<pre><code>jMove.fromTo(element9, 0.4, 
+	{ left: Math.random() * 500 + "px" }, 
+	{ left: Math.random() * 500 + "px" });</code></pre>
 
 ## ease
 
@@ -130,7 +132,12 @@ or:
 
 ## matrix
 
-<pre><code>jMove.matrix().scale(1.5).rotate(30).skew(20, 10).translate(120, 10).flush(element10);</code></pre>
+<pre><code>jMove.matrix()
+	.scale(1.5)
+	.rotate(30)
+	.skew(20, 10)
+	.translate(120, 10)
+	.flush(element10);</code></pre>
 
 ## move
 
