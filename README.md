@@ -1,4 +1,3 @@
-
 # jMove
 
 css 3 animation / transition
@@ -7,97 +6,124 @@ css 3 animation / transition
 
 css 3 animation keyframes:
 
-<pre><code>	jMove.keyframes("name", {
+```javascript
+jMove.keyframes("name", {
 		from: { transform: "scale(1.2)" },
 		to: { transform: "scale(1)" }
-	});</code></pre>
-<pre><code>@-webkit-keyframes name{
+	});
+```
+```css
+@-webkit-keyframes name{
 	from{-webkit-transform:scale(1.2);}
 	to{-webkit-transform:scale(1);}
-}</code></pre>
+}
+```
 
 or:
 
-<pre><code>jMove.keyframes().add("name1", {
+```javascript
+jMove.keyframes().add("name1", {
 		from: { transform: "scale(1)" },
 		to: { transform: "scale(1.2)" }
 	}).add("name2", {
 		from: { transform: "scale(1)" },
 		to: { transform: "scale(0.8)" }
-	}).flush();</code></pre>
-<pre><code>@-webkit-keyframes name1{
+	}).flush();
+```
+```css
+@-webkit-keyframes name1{
 	from{-webkit-transform:scale(1);}
 	to{-webkit-transform:scale(1.2);}
 }
 @-webkit-keyframes name2{
 	from{-webkit-transform:scale(1);}
 	to{-webkit-transform:scale(0.8);}
-}</code></pre>
+}
+```
 
 ## animation
 
-<pre><code>jMove.animation(element1, "name1");</code></pre>
+```javascript
+jMove.animation(element1, "name1");
+```
 
 or:
 
-<pre><code>jMove.animation(element2, "name2 1s ease-in-out 0.5s infinite alternate");</code></pre>
+```javascript
+jMove.animation(element2, "name2 1s ease-in-out 0.5s infinite alternate");
+```
 
 ## animationReady
 
 wait for realtime keyframes
 
-<pre><code>var keyframes_name = "temp_" + new Date().getTime();
+```javascript
+var keyframes_name = "temp_" + new Date().getTime();
 jMove.keyframes(keyframes_name, {
 	from: { left: "0px" },
 	to: { left: Math.random() * 500 + "px" }
 });
 jMove.animationReady(function(){	
 	jMove.animation(element3, keyframes_name);
-});</code></pre>
+});
+```
 
 ## transition &amp; transitionReady
 
-<pre><code>jMove.transition(element4, "all 0.4s ease 0.1s");
+```javascript
+jMove.transition(element4, "all 0.4s ease 0.1s");
 jMove.transitionReady(function(){
 	element4.style.left = Math.random() * 500 + "px";
-});</code></pre>
+});
+```
 
 or:
 
-<pre><code>jMove.transition(element5, "left 0.4s ease 0.1s", "top 1s ease-in 0.5s", function(){	
+```javascript
+jMove.transition(element5, "left 0.4s ease 0.1s", "top 1s ease-in 0.5s", function(){	
 	element5.style.left = Math.random() * 500 + "px";	
 	element5.style.top = Math.random() * 50 + "px";
-});</code></pre>
+});
+```
 
 ## to
 
 an easier way
 
-<pre><code>jMove.to(element6, 0.4, { left: Math.random() * 500 + "px" });</code></pre>
+```javascript
+jMove.to(element6, 0.4, { left: Math.random() * 500 + "px" });
+```
 
 or:
 
-<pre><code>jMove.to(element7, 2, { 
+```javascript
+jMove.to(element7, 2, { 
 	left: Math.random() * 500 + "px", 
 	top:Math.random() * 300 + "px"
 }, { 
 	ease: jMove.ease.sineInOut, 
 	delay: 0.5 
-}, function(){ alert("end") });</code></pre>
+}, function(){ alert("end") });
+```
 
 ## from
 
-<pre><code>jMove.from(element8, 0.4, { left: Math.random() * 500 + "px" });</code></pre>
+```javascript
+jMove.from(element8, 0.4, { left: Math.random() * 500 + "px" });
+```
 
 ## fromTo
 
-<pre><code>jMove.fromTo(element9, 0.4, 
+```javascript
+jMove.fromTo(element9, 0.4, 
 	{ left: Math.random() * 500 + "px" }, 
-	{ left: Math.random() * 500 + "px" });</code></pre>
+	{ left: Math.random() * 500 + "px" });
+```
 
 ## ease
 
-<pre><code>jMove.ease = {
+```javascript
+jMove.ease = {
 	in$: 'ease-in',
 	out: 'ease-out',
 	inOut: 'ease-in-out',
@@ -128,30 +154,36 @@ or:
 	backIn: 'cubic-bezier(0.600, -0.280, 0.735, 0.045)',
 	backOut: 'cubic-bezier(0.175, 0.885, 0.320, 1.275)',
 	backInOut: 'cubic-bezier(0.680, -0.550, 0.265, 1.550)'
-};</code></pre>
+};
+```
 
 ## matrix
 
-<pre><code>jMove.matrix()
+```javascript
+jMove.matrix()
 	.scale(1.5)
 	.rotate(30)
 	.skew(20, 10)
 	.translate(120, 10)
-	.flush(element10);</code></pre>
+	.flush(element10);
+```
 
 ## move
 
-<pre><code>var move = jMove.move(element11)
+```javascript
+var move = jMove.move(element11)
 	.from(0.4, { scale: 0.5 }, 0.3)
 	.to(0.8, { rotate: 150 })
 	.fromTo(1.2, { left: "100px" }, { left: "300px" })
 	.timeScale(2).flush(function(){
 		alert("end");
-	});</code></pre>
+	});
+```
 
 ## move.kill
 
-<pre><code>var move = jMove.move(element12)
+```javascript
+var move = jMove.move(element12)
 	.from(0.4, { scale: 0.5 }, 0.3)
 	.to(0.8, { rotate: 150 })
 	.fromTo(1.2, { left: "100px" }, { left: "300px" })
@@ -160,4 +192,5 @@ or:
 	});
 setTimeout(function(){
 	move.kill();
-}, 1200);</code></pre>
+}, 1200);
+```
