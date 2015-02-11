@@ -1,0 +1,298 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Jmove by jatecl</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Jmove</h1>
+        <p>css3 animation/transition</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/jatecl/jmove" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/jatecl/jmove/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/jatecl/jmove/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        
+
+<h1>
+<a id="jmove-demo" class="anchor" href="#jmove-demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>jMove demo</h1>
+
+<h2>
+<a id="keyframes" class="anchor" href="#keyframes" aria-hidden="true"><span class="octicon octicon-link"></span></a>keyframes</h2>
+
+<p>css 3 animation keyframes:</p>
+
+<div class="highlight highlight-javascript"><pre>jMove.keyframes(<span class="pl-s1"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>, {
+    from<span class="pl-k">:</span> { transform<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>scale(1.2)<span class="pl-pds">"</span></span> },
+    to<span class="pl-k">:</span> { transform<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>scale(1)<span class="pl-pds">"</span></span> }
+});</pre></div>
+
+<pre id="d1"></pre>
+
+
+
+<p>or:</p>
+
+<div class="highlight highlight-javascript"><pre>jMove.keyframes().<span class="pl-s3">add</span>(<span class="pl-s1"><span class="pl-pds">"</span>name1<span class="pl-pds">"</span></span>, {
+        from<span class="pl-k">:</span> { transform<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>scale(1)<span class="pl-pds">"</span></span> },
+        to<span class="pl-k">:</span> { transform<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>scale(1.2)<span class="pl-pds">"</span></span> }
+    }).<span class="pl-s3">add</span>(<span class="pl-s1"><span class="pl-pds">"</span>name2<span class="pl-pds">"</span></span>, {
+        from<span class="pl-k">:</span> { transform<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>scale(1)<span class="pl-pds">"</span></span> },
+        to<span class="pl-k">:</span> { transform<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>scale(0.8)<span class="pl-pds">"</span></span> }
+    }).flush();</pre></div>
+
+<pre id="d2"></pre>
+
+
+
+<h2>
+<a id="animation" class="anchor" href="#animation" aria-hidden="true"><span class="octicon octicon-link"></span></a>animation</h2>
+
+<div class="highlight highlight-javascript"><pre>jMove.animation(element1, <span class="pl-s1"><span class="pl-pds">"</span>name1<span class="pl-pds">"</span></span>);</pre></div>
+
+<div>
+    <div id="element1"></div>
+</div>
+
+<p>Start</p>
+
+<p>or:</p>
+
+<div class="highlight highlight-javascript"><pre>jMove.animation(element2, <span class="pl-s1"><span class="pl-pds">"</span>name2 1s ease-in-out 0.5s infinite alternate<span class="pl-pds">"</span></span>);</pre></div>
+
+<div>
+    <div id="element2"></div>
+</div>
+
+<p>Start</p>
+
+<h2>
+<a id="animationready" class="anchor" href="#animationready" aria-hidden="true"><span class="octicon octicon-link"></span></a>animationReady</h2>
+
+<p>wait for realtime keyframes</p>
+
+<div class="highlight highlight-javascript"><pre><span class="pl-s">var</span> keyframes_name <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>temp_<span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-k">new</span> <span class="pl-en">Date</span>().<span class="pl-s3">getTime</span>();
+jMove.keyframes(keyframes_name, {
+    from<span class="pl-k">:</span> { left<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>0px<span class="pl-pds">"</span></span> },
+    to<span class="pl-k">:</span> { left<span class="pl-k">:</span> <span class="pl-s3">Math</span>.<span class="pl-s3">random</span>() <span class="pl-k">*</span> <span class="pl-c1">500</span> <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>px<span class="pl-pds">"</span></span> }
+});
+jMove.animationReady(<span class="pl-st">function</span>(){
+    jMove.animation(element3, keyframes_name);
+});</pre></div>
+
+<div>
+    <div id="element3"></div>
+</div>
+
+<p>
+    Start
+</p>
+
+<h2>
+<a id="transition--transitionready" class="anchor" href="#transition--transitionready" aria-hidden="true"><span class="octicon octicon-link"></span></a>transition &amp; transitionReady</h2>
+
+<div class="highlight highlight-javascript"><pre>jMove.transition(element4, <span class="pl-s1"><span class="pl-pds">"</span>all 0.4s ease 0.1s<span class="pl-pds">"</span></span>);
+jMove.transitionReady(<span class="pl-st">function</span>(){
+    element4.<span class="pl-sc">style</span>.<span class="pl-sc">left</span> <span class="pl-k">=</span> <span class="pl-s3">Math</span>.<span class="pl-s3">random</span>() <span class="pl-k">*</span> <span class="pl-c1">500</span> <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>px<span class="pl-pds">"</span></span>;
+});</pre></div>
+
+<div>
+    <div id="element4"></div>
+</div>
+
+<p>
+    Start
+</p>
+
+<p>or:</p>
+
+<div class="highlight highlight-javascript"><pre>jMove.transition(element5, <span class="pl-s1"><span class="pl-pds">"</span>left 0.4s ease 0.1s<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>top 1s ease-in 0.5s<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>(){
+    element5.<span class="pl-sc">style</span>.<span class="pl-sc">left</span> <span class="pl-k">=</span> <span class="pl-s3">Math</span>.<span class="pl-s3">random</span>() <span class="pl-k">*</span> <span class="pl-c1">500</span> <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>px<span class="pl-pds">"</span></span>;
+    element5.<span class="pl-sc">style</span>.<span class="pl-sc">top</span> <span class="pl-k">=</span> <span class="pl-s3">Math</span>.<span class="pl-s3">random</span>() <span class="pl-k">*</span> <span class="pl-c1">50</span> <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>px<span class="pl-pds">"</span></span>;
+});</pre></div>
+
+<div>
+    <div id="element5"></div>
+</div>
+
+<p>
+    Start
+</p>
+
+<h2>
+<a id="to" class="anchor" href="#to" aria-hidden="true"><span class="octicon octicon-link"></span></a>to</h2>
+
+<p>an easier way</p>
+
+<div class="highlight highlight-javascript"><pre>jMove.to(element6, <span class="pl-c1">0.4</span>, { left<span class="pl-k">:</span> <span class="pl-s3">Math</span>.<span class="pl-s3">random</span>() <span class="pl-k">*</span> <span class="pl-c1">500</span> <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>px<span class="pl-pds">"</span></span> });</pre></div>
+
+<div>
+    <div id="element6"></div>
+</div>
+
+<p>Start</p>
+
+<p>or:</p>
+
+<div class="highlight highlight-javascript"><pre>jMove.to(element7, <span class="pl-c1">2</span>, {
+    left<span class="pl-k">:</span> <span class="pl-s3">Math</span>.<span class="pl-s3">random</span>() <span class="pl-k">*</span> <span class="pl-c1">500</span> <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>px<span class="pl-pds">"</span></span>,
+    top<span class="pl-k">:</span><span class="pl-s3">Math</span>.<span class="pl-s3">random</span>() <span class="pl-k">*</span> <span class="pl-c1">300</span> <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>px<span class="pl-pds">"</span></span>
+}, {
+    ease<span class="pl-k">:</span> jMove.ease.sineInOut,
+    delay<span class="pl-k">:</span> <span class="pl-c1">0.5</span>
+}, <span class="pl-st">function</span>(){ <span class="pl-s3">alert</span>(<span class="pl-s1"><span class="pl-pds">"</span>end<span class="pl-pds">"</span></span>) });</pre></div>
+
+<div>
+    <div id="element7"></div>
+</div>
+
+<p>
+    Start
+</p>
+
+<h2>
+<a id="from" class="anchor" href="#from" aria-hidden="true"><span class="octicon octicon-link"></span></a>from</h2>
+
+<div class="highlight highlight-javascript"><pre>jMove.from(element8, <span class="pl-c1">0.4</span>, { left<span class="pl-k">:</span> <span class="pl-s3">Math</span>.<span class="pl-s3">random</span>() <span class="pl-k">*</span> <span class="pl-c1">500</span> <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>px<span class="pl-pds">"</span></span> });</pre></div>
+
+<div>
+    <div id="element8"></div>
+</div>
+
+<p>Start</p>
+
+<h2>
+<a id="fromto" class="anchor" href="#fromto" aria-hidden="true"><span class="octicon octicon-link"></span></a>fromTo</h2>
+
+<div class="highlight highlight-javascript"><pre>jMove.fromTo(element9, <span class="pl-c1">0.4</span>, { left<span class="pl-k">:</span> <span class="pl-s3">Math</span>.<span class="pl-s3">random</span>() <span class="pl-k">*</span> <span class="pl-c1">500</span> <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>px<span class="pl-pds">"</span></span> }, { left<span class="pl-k">:</span> <span class="pl-s3">Math</span>.<span class="pl-s3">random</span>() <span class="pl-k">*</span> <span class="pl-c1">500</span> <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>px<span class="pl-pds">"</span></span> });</pre></div>
+
+<div>
+    <div id="element9"></div>
+</div>
+
+<p>Start</p>
+
+<h2>
+<a id="ease" class="anchor" href="#ease" aria-hidden="true"><span class="octicon octicon-link"></span></a>ease</h2>
+
+<div class="highlight highlight-javascript"><pre>jMove.ease <span class="pl-k">=</span> {
+    <span class="pl-k">in</span>$<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>ease-in<span class="pl-pds">'</span></span>,
+    out<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>ease-out<span class="pl-pds">'</span></span>,
+    inOut<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>ease-in-out<span class="pl-pds">'</span></span>,
+    linear<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>linear<span class="pl-pds">'</span></span>,
+    ease<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>ease<span class="pl-pds">'</span></span>,
+    snap<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0,1,.5,1)<span class="pl-pds">'</span></span>,
+    quadIn<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.550, 0.085, 0.680, 0.530)<span class="pl-pds">'</span></span>,
+    quadOut<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.250, 0.460, 0.450, 0.940)<span class="pl-pds">'</span></span>,
+    quadInOut<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.455, 0.030, 0.515, 0.955)<span class="pl-pds">'</span></span>,
+    cubicIn<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.550, 0.055, 0.675, 0.190)<span class="pl-pds">'</span></span>,
+    cubicOut<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.215, 0.610, 0.355, 1.000)<span class="pl-pds">'</span></span>,
+    cubicInOut<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.645, 0.045, 0.355, 1.000)<span class="pl-pds">'</span></span>,
+    quartIn<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.895, 0.030, 0.685, 0.220)<span class="pl-pds">'</span></span>,
+    quartOut<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.165, 0.840, 0.440, 1.000)<span class="pl-pds">'</span></span>,
+    quartInOut<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.770, 0.000, 0.175, 1.000)<span class="pl-pds">'</span></span>,
+    quintIn<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.755, 0.050, 0.855, 0.060)<span class="pl-pds">'</span></span>,
+    quintOut<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.230, 1.000, 0.320, 1.000)<span class="pl-pds">'</span></span>,
+    quintInOut<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.860, 0.000, 0.070, 1.000)<span class="pl-pds">'</span></span>,
+    sineIn<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.470, 0.000, 0.745, 0.715)<span class="pl-pds">'</span></span>,
+    sineOut<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.390, 0.575, 0.565, 1.000)<span class="pl-pds">'</span></span>,
+    sineInOut<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.445, 0.050, 0.550, 0.950)<span class="pl-pds">'</span></span>,
+    expoIn<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.950, 0.050, 0.795, 0.035)<span class="pl-pds">'</span></span>,
+    expoOut<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.190, 1.000, 0.220, 1.000)<span class="pl-pds">'</span></span>,
+    expoInOut<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(1.000, 0.000, 0.000, 1.000)<span class="pl-pds">'</span></span>,
+    circIn<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.600, 0.040, 0.980, 0.335)<span class="pl-pds">'</span></span>,
+    circOut<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.075, 0.820, 0.165, 1.000)<span class="pl-pds">'</span></span>,
+    circInOut<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.785, 0.135, 0.150, 0.860)<span class="pl-pds">'</span></span>,
+    backIn<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.600, -0.280, 0.735, 0.045)<span class="pl-pds">'</span></span>,
+    backOut<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.175, 0.885, 0.320, 1.275)<span class="pl-pds">'</span></span>,
+    backInOut<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>cubic-bezier(0.680, -0.550, 0.265, 1.550)<span class="pl-pds">'</span></span>
+};</pre></div>
+
+<h2>
+<a id="matrix" class="anchor" href="#matrix" aria-hidden="true"><span class="octicon octicon-link"></span></a>matrix</h2>
+
+<div class="highlight highlight-javascript"><pre>jMove.matrix().scale(<span class="pl-c1">1.5</span>).rotate(<span class="pl-c1">30</span>).skew(<span class="pl-c1">20</span>, <span class="pl-c1">10</span>).translate(<span class="pl-c1">120</span>, <span class="pl-c1">10</span>).flush(element10);</pre></div>
+
+<div>
+    <div id="element10"></div>
+</div>
+
+<p>Start</p>
+
+<h2>
+<a id="move" class="anchor" href="#move" aria-hidden="true"><span class="octicon octicon-link"></span></a>move</h2>
+
+<div class="highlight highlight-javascript"><pre><span class="pl-s">var</span> move <span class="pl-k">=</span> jMove.move(element11)
+    .from(<span class="pl-c1">0.4</span>, { scale<span class="pl-k">:</span> <span class="pl-c1">0.5</span> }, <span class="pl-c1">0.3</span>)
+    .to(<span class="pl-c1">0.8</span>, { rotate<span class="pl-k">:</span> <span class="pl-c1">150</span> })
+    .fromTo(<span class="pl-c1">1.2</span>, { left<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>100px<span class="pl-pds">"</span></span> }, { left<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>300px<span class="pl-pds">"</span></span> })
+    .timeScale(<span class="pl-c1">2</span>).flush(<span class="pl-st">function</span>(){
+        <span class="pl-s3">alert</span>(<span class="pl-s1"><span class="pl-pds">"</span>end<span class="pl-pds">"</span></span>);
+    });</pre></div>
+
+<div>
+    <div id="element11"></div>
+</div>
+
+<p>
+    Start
+</p>
+
+<h2>
+<a id="movekill" class="anchor" href="#movekill" aria-hidden="true"><span class="octicon octicon-link"></span></a>move.kill</h2>
+
+<div class="highlight highlight-javascript"><pre><span class="pl-s">var</span> move <span class="pl-k">=</span> jMove.move(element12)
+    .from(<span class="pl-c1">0.4</span>, { scale<span class="pl-k">:</span> <span class="pl-c1">0.5</span> }, <span class="pl-c1">0.3</span>)
+    .to(<span class="pl-c1">0.8</span>, { rotate<span class="pl-k">:</span> <span class="pl-c1">150</span> })
+    .fromTo(<span class="pl-c1">1.2</span>, { left<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>100px<span class="pl-pds">"</span></span> }, { left<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">"</span>300px<span class="pl-pds">"</span></span> })
+    .timeScale(<span class="pl-c1">2</span>).flush(<span class="pl-st">function</span>(){
+        <span class="pl-s3">alert</span>(<span class="pl-s1"><span class="pl-pds">"</span>end<span class="pl-pds">"</span></span>);
+    });
+<span class="pl-s3">setTimeout</span>(<span class="pl-st">function</span>(){
+    move.kill();
+}, <span class="pl-c1">1200</span>);</pre></div>
+
+<div>
+    <div id="element12"></div>
+</div>
+
+<p>
+    Start
+</p>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/jatecl">jatecl</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
