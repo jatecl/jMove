@@ -1,6 +1,8 @@
 # jMove
 
-css 3 animation / transition
+css3 animation/transition
+
+demo here http://jatecl.github.io/jmove/
 
 ## keyframes
 

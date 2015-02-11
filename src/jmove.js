@@ -618,7 +618,7 @@ var jMove = (function () {
 		return this;
 	};
 	//总长度，不受timeScale影响
-	_MoveGroup.prototype.totalDuration = function () {
+	_MoveGroup.prototype.duration = function () {
 		var dur = 0;
 		this._list.forEach(function (o) { dur = Math.max(o._duration, dur); });
 		return dur; //不受timeScale影响
@@ -626,7 +626,7 @@ var jMove = (function () {
 	//回调函数
 	_MoveGroup.prototype.addCallback = function (callback, time) {
 		if (!callback) return;
-		if (arguments.length == 1) time = this.totalDuration();
+		if (arguments.length == 1) time = this.duration();
 		if (!this._callback) this._callback = [];
 		this._callback.push([callback, time]);
 	};
@@ -651,7 +651,7 @@ var jMove = (function () {
 		}
 		timeout(function () {
 			me._list.forEach(function (o) { o.kill(1); });
-		}, this.totalDuration());
+		}, this.duration());
 		return this;
 	};
 	//终止执行
