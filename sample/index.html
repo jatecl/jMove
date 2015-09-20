@@ -3,7 +3,7 @@
 <head>
 	<title>jMove demo</title>
 	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-	<script src="../src/jmove.js"></script>
+	<script src="../src/jMove.js"></script>
 	<style type="text/css">
 		.js { border: 1px solid #ccc; background: #f5f5f5; padding: 10px; margin: 10px 10px 10px 20px; }
 		.css { border: 1px solid #cde; background: #f5faff; padding: 10px; margin: 10px 10px 10px 20px; }
@@ -220,7 +220,7 @@ jMove.matrix().scale(1.5).rotate(30).skew(20, 10).translate(120, 10).flush(eleme
 	</button>
 	<h2>move</h2>
 <pre class="js">
-var move = jMove.move(element11)
+var move = jMove(element11)
 	.from(0.4, { scale: 0.5 }, 0.3)
 	.to(0.8, { rotate: 150 })
 	.fromTo(1.2, { left: "100px" }, { left: "300px" })
@@ -232,14 +232,14 @@ var move = jMove.move(element11)
 		<div style="width:80px;height:80px;left:10px;top:10px;position:absolute;background:#93f;" id="element11"></div>
 	</div>
 	<button onclick='
-var move = jMove.move(element11).from(0.4, { scale: 0.5 }, 0.3).to(0.8, { rotate: 150 }).fromTo(1.2, { left: "100px" }, { left: "300px" }).timeScale(2).flush(function(){
+var move = jMove(element11).from(0.4, { scale: 0.5 }, 0.3).to(0.8, { rotate: 150 }).fromTo(1.2, { left: "100px" }, { left: "300px" }).timeScale(2).flush(function(){
 	alert("end");
 });' class="btn">
 		Start
 	</button>
 	<h2>move.kill</h2>
 <pre class="js">	
-var move = jMove.move(element12)
+var move = jMove(element12)
 	.from(0.4, { scale: 0.5 }, 0.3)
 	.to(0.8, { rotate: 150 })
 	.fromTo(1.2, { left: "100px" }, { left: "300px" })
@@ -254,7 +254,7 @@ setTimeout(function(){
 		<div style="width:80px;height:80px;left:10px;top:10px;position:absolute;background:#9f3;" id="element12"></div>
 	</div>
 	<button onclick='
-var move = jMove.move(element12).from(0.4, { scale: 0.5 }, 0.3).to(0.8, { rotate: 150 }).fromTo(1.2, { left: "100px" }, { left: "300px" }).timeScale(2).flush(function () {
+var move = jMove(element12).from(0.4, { scale: 0.5 }, 0.3).to(0.8, { rotate: 150 }).fromTo(1.2, { left: "100px" }, { left: "300px" }).timeScale(2).flush(function () {
 	alert("end");
 });
 setTimeout(function(){

@@ -173,7 +173,7 @@ jMove.matrix()
 ## move
 
 ```javascript
-var move = jMove.move(element11)
+var move = jMove(element11)
 	.from(0.4, { scale: 0.5 }, 0.3)
 	.to(0.8, { rotate: 150 })
 	.fromTo(1.2, { left: "100px" }, { left: "300px" })
@@ -185,7 +185,7 @@ var move = jMove.move(element11)
 ## move.kill
 
 ```javascript
-var move = jMove.move(element12)
+var move = jMove(element12)
 	.from(0.4, { scale: 0.5 }, 0.3)
 	.to(0.8, { rotate: 150 })
 	.fromTo(1.2, { left: "100px" }, { left: "300px" })

@@ -223,7 +223,9 @@ var jMove = (function () {
 	};
 
 	//输出的对象
-	var t = {};
+	var t = function (node) {
+	    return new _MoveGroup(node);
+	};
 	t.each = _each;
 	//变形
 	t.matrix = function () {
@@ -671,9 +673,6 @@ var jMove = (function () {
 	};
 
 	//单独属性的动画支持
-	t.move = function (node) {
-		return new _MoveGroup(node);
-	};
 
 	//jQuery插入
 	if (window.$ && $.fn) {
