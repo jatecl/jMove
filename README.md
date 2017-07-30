@@ -1,12 +1,8 @@
 # jMove
 
-css3 animation/transition
-
-demo here http://jatecl.github.io/jmove/
+jMove是要给简单的css3动画库
 
 ## keyframes
-
-css 3 animation keyframes:
 
 ```javascript
 jMove.keyframes("name", {
@@ -20,8 +16,6 @@ jMove.keyframes("name", {
 	to{-webkit-transform:scale(1);}
 }
 ```
-
-or:
 
 ```javascript
 jMove.keyframes().add("name1", {
@@ -49,15 +43,13 @@ jMove.keyframes().add("name1", {
 jMove.animation(element1, "name1");
 ```
 
-or:
-
 ```javascript
 jMove.animation(element2, "name2 1s ease-in-out 0.5s infinite alternate");
 ```
 
 ## animationReady
 
-wait for realtime keyframes
+等待新加入的keyframes生效
 
 ```javascript
 var keyframes_name = "temp_" + new Date().getTime();
@@ -70,7 +62,7 @@ jMove.animationReady(function(){
 });
 ```
 
-## transition &amp; transitionReady
+## transition/transitionReady
 
 ```javascript
 jMove.transition(element4, "all 0.4s ease 0.1s");
@@ -78,8 +70,6 @@ jMove.transitionReady(function(){
 	element4.style.left = Math.random() * 500 + "px";
 });
 ```
-
-or:
 
 ```javascript
 jMove.transition(element5, "left 0.4s ease 0.1s", "top 1s ease-in 0.5s", function(){	
@@ -90,13 +80,11 @@ jMove.transition(element5, "left 0.4s ease 0.1s", "top 1s ease-in 0.5s", functio
 
 ## to
 
-an easier way
+更简洁的方法
 
 ```javascript
 jMove.to(element6, 0.4, { left: Math.random() * 500 + "px" });
 ```
-
-or:
 
 ```javascript
 jMove.to(element7, 2, { 
