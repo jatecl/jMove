@@ -1,6 +1,9 @@
 # jMove
 
-jMove是要给简单的css3动画库
+jMove是一个简单的css3动画库
+```
+npm install https://github.com/jatecl/jMove.git --save
+```
 
 ## keyframes
 
